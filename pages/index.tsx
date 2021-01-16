@@ -8,16 +8,11 @@ import GameUtils from '../shared/gameHelpers/GameUtils';
 // Components
 import { InputSection } from '../components/home/InputSection';
 import { OutputSection } from '../components/home/OutputSection';
-import { AIStats } from '../components/home/widgets/AIStats';
+import { AIStats } from '../components/sidebar/widgets/AIStats';
 
 // Constants
 import { CONSTANTS } from '../shared/config/constants';
-
-// Types
-interface SettingsInterface {
-  ENGINE: 'javascript' | 'wasm';
-  MAX_DEPTH: number;
-}
+import { SettingsWidget } from '../components/sidebar/widgets/Settings';
 
 // Main functional component
 export default function Home() {
@@ -27,6 +22,8 @@ export default function Home() {
     MAX_DEPTH: CONSTANTS.MAX_DEPTH,
   });
   const winner = GameUtils.winner(gameState);
+
+  console.log(settings.MAX_DEPTH);
 
   // If the AI is called to play, then play
   useEffect(() => {
@@ -69,8 +66,9 @@ export default function Home() {
           </footer>
         </div>
 
-        <div className="flex justify-start items-baseline bg-bg-color-light w-1/2 max-w-md p-12">
+        <div className="flex flex-col justify-start items-baseline bg-bg-color-light w-1/2 max-w-md p-12">
           <AIStats gameState={gameState} />
+          <SettingsWidget settings={settings} setSettings={setSettings} />
         </div>
       </div>
     </>

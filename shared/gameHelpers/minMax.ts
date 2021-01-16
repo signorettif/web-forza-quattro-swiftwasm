@@ -5,7 +5,12 @@ import GameUtils from './GameUtils';
 // Constants
 import { CONSTANTS } from './../config/constants';
 
-export const minMax = (state: GameState, isMaximizing = true, depth = 0) => {
+export const minMax = (
+  state: GameState,
+  isMaximizing = true,
+  maxDepth = CONSTANTS.MAX_DEPTH,
+  depth = 0
+) => {
   let bestMove = -1;
   let bestScore = isMaximizing === true ? -Infinity : Infinity;
 
@@ -14,8 +19,8 @@ export const minMax = (state: GameState, isMaximizing = true, depth = 0) => {
     const tempGameScore = GameUtils.score(tempGame);
     var newBestScore: number;
 
-    if (!tempGame.isTerminal() && depth < CONSTANTS.MAX_DEPTH) {
-      newBestScore = minMax(tempGame, !isMaximizing, depth + 1)[0];
+    if (!tempGame.isTerminal() && depth < maxDepth) {
+      newBestScore = minMax(tempGame, !isMaximizing, maxDepth, depth + 1)[0];
     } else {
       newBestScore = tempGameScore;
     }
