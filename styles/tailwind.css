@@ -1,0 +1,10 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('http://fonts.cdnfonts.com/css/khula');
+
+body {
+  font-family: 'Khula', sans-serif;
+  font-variant: normal;
+}
