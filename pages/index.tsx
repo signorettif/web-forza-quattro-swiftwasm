@@ -13,15 +13,27 @@ import { AIStats } from '../components/home/widgets/AIStats';
 // Constants
 import { CONSTANTS } from '../shared/config/constants';
 
+// Types
+interface SettingsInterface {
+  ENGINE: 'javascript' | 'wasm';
+  MAX_DEPTH: number;
+}
+
 // Main functional component
 export default function Home() {
   const [gameState, setGameState] = useState(GameUtils.startGame());
+  const [settings, setSettings] = useState<SettingsInterface>({
+    ENGINE: 'javascript',
+    MAX_DEPTH: CONSTANTS.MAX_DEPTH,
+  });
   const winner = GameUtils.winner(gameState);
 
   // If the AI is called to play, then play
   useEffect(() => {
     if (gameState.player === CONSTANTS.AI_PLAYER) {
-      setGameState(() => GameUtils.playAIBestNextMove(gameState));
+      setGameState(() =>
+        GameUtils.playAIBestNextMove(gameState, settings.MAX_DEPTH)
+      );
     }
   }, [gameState.player]);
 

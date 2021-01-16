@@ -192,11 +192,14 @@ class GameUtils {
   //
   // Runs the prediction for the next best move
   //
-  static predictAIBestNextMove = (state: GameState) => {
+  static predictAIBestNextMove = (
+    state: GameState,
+    maxDepth = CONSTANTS.MAX_DEPTH
+  ) => {
     let bestPlay = -1;
 
     if (state.player === AI_PLAYER) {
-      const [bestScore, bestMove] = minMax(state);
+      const [bestScore, bestMove] = minMax(state, true, maxDepth);
 
       console.log(
         `[AI] Playing in ${bestMove + 1} with expected payoff of ${bestScore}`
@@ -215,8 +218,11 @@ class GameUtils {
   //
   // Plays the best next move for
   //
-  static playAIBestNextMove = (state: GameState) => {
-    const colToPlay = GameUtils.predictAIBestNextMove(state);
+  static playAIBestNextMove = (
+    state: GameState,
+    maxDepth = CONSTANTS.MAX_DEPTH
+  ) => {
+    const colToPlay = GameUtils.predictAIBestNextMove(state, maxDepth);
     return GameUtils.playInColumn(state, colToPlay);
   };
 

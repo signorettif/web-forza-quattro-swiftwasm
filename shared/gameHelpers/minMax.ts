@@ -6,8 +6,6 @@ import GameUtils from './GameUtils';
 import { CONSTANTS } from './../config/constants';
 
 export const minMax = (state: GameState, isMaximizing = true, depth = 0) => {
-  // If it is a terminal node, then we can call it a day
-
   let bestMove = -1;
   let bestScore = isMaximizing === true ? -Infinity : Infinity;
 
