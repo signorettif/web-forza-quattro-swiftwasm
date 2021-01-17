@@ -1,0 +1,147 @@
+// Main page structure
+.container {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: space-between;
+}
+
+.main {
+  margin: auto;
+  width: 100%;
+
+  & > * {
+    max-width: var(--sm);
+    margin: auto;
+    width: 100%;
+    padding: 0 20px;
+  }
+
+  section {
+    width: 100%;
+    margin: 60px auto;
+    max-width: var(--sm);
+  }
+
+  .hero {
+    text-align: center;
+    margin-top: 40px;
+    margin-bottom: 80px;
+    max-width: 900px;
+  }
+
+  .divider {
+    display: block;
+    height: 1px;
+    background-color: var(--divider);
+  }
+}
+
+// Experiments
+.experiment {
+  margin-bottom: 36px;
+
+  &:hover {
+    cursor: pointer;
+
+    h3 {
+      text-decoration: underline;
+    }
+  }
+}
+
+.experimentEmpty {
+  @for $i from 1 through 3 {
+    &:nth-child(#{$i}) {
+      opacity: #{0.8 - $i * 0.2};
+    }
+  }
+
+  span {
+    display: block;
+    background-color: var(--noon);
+    border-radius: 6px;
+
+    margin-bottom: 10px;
+    height: 26px;
+    width: 100px;
+
+    &:not(:first-child) {
+      margin-bottom: 8px;
+      height: 22px;
+      opacity: 0.7;
+      width: 100%;
+    }
+
+    &:nth-child(3) {
+      width: 48%;
+    }
+  }
+}
+
+// Logo
+.logo {
+  width: 100%;
+}
+
+// Footer
+.footer {
+  background-color: #000;
+  font-size: 14px;
+  padding: 30px 20px;
+  width: 100%;
+  max-width: var(--sm);
+  margin: 0 auto;
+
+  .item {
+    font-style: normal;
+    font-size: 14px;
+    line-height: 24px;
+  }
+
+  a {
+    color: var(--color-text);
+  }
+
+  p > a {
+    text-decoration: underline;
+  }
+
+  .divider {
+    visibility: hidden;
+    font-weight: 100;
+    color: var(--color-text-tertiary);
+  }
+}
+
+// Desktop
+@media screen and (min-width: 640px) {
+  .main {
+    section {
+      margin: 80px auto;
+    }
+
+    .hero {
+      margin-top: 60px;
+      margin-bottom: 120px;
+    }
+  }
+
+  .footer {
+    background-color: var(--background-color);
+    box-shadow: 0 0 100px rgb(0 0 0 / 100%);
+    text-align: center;
+    border-radius: 12px 12px 0 0;
+    padding: 20px;
+
+    .item {
+      padding: 0 10px;
+      display: inline-block;
+    }
+
+    .divider {
+      visibility: visible;
+    }
+  }
+}
