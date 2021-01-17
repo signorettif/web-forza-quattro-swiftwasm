@@ -1,10 +1,13 @@
 // React stuff
-import { Dispatch, SetStateAction } from 'react';
-import { CONSTANTS } from '../../shared/config/constants';
+import { Dispatch, SetStateAction } from "react";
+import { CONSTANTS } from "shared/config/constants";
 
 // Game stuff
-import GameState from '../../shared/gameHelpers/GameState';
-import GameUtils from '../../shared/gameHelpers/GameUtils';
+import GameState from "shared/gameHelpers/GameState";
+import GameUtils from "shared/gameHelpers/GameUtils";
+
+// Styles
+import styles from "styles/components/board.module.scss";
 
 // Types
 interface InputSectionProps {
@@ -24,16 +27,12 @@ export const InputSection = ({
   };
 
   return (
-    <>
+    <div className={styles.inputs}>
       {columns.map((column) => (
-        <div
-          key={column}
-          className="text-center cursor-pointer text-blue-700"
-          onClick={() => playColumn(column - 1)}
-        >
-          {column !== 0 ? column : ''}
+        <div key={column} onClick={() => playColumn(column - 1)}>
+          {column !== 0 ? column : ""}
         </div>
       ))}
-    </>
+    </div>
   );
 };

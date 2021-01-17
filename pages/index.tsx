@@ -9,8 +9,8 @@ import GameUtils from "../shared/gameHelpers/GameUtils";
 import { Difficulty } from "components/navbar/Difficulty";
 import { ToggleEngine } from "components/navbar/ToggleEngine";
 import { AIStats } from "components/navbar/AIStats";
-import { InputSection } from "../components/home/InputSection";
-import { OutputSection } from "../components/home/OutputSection";
+import { InputSection } from "../components/board/InputSection";
+import { OutputSection } from "../components/board/OutputSection";
 
 // Constants
 import { CONSTANTS } from "../shared/config/constants";
@@ -79,14 +79,16 @@ export default function Home() {
           </div>
         </nav>
 
-        {/* <div>
+        <div className={styles.belowNavbar}>
           <main>
             <InputSection gameState={gameState} setGameState={setGameState} />
             <OutputSection gameState={gameState} />
           </main>
 
-          <footer>Made w/ ❤️ in Milan. Source code available on Github.</footer>
-        </div> */}
+          <footer>
+            <p>Made w/ ❤️ in Milan. Source code available on Github.</p>
+          </footer>
+        </div>
       </div>
     </>
   );

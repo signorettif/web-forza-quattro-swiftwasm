@@ -5,6 +5,8 @@
   /* Key colors */
   --midnight: #191919;
   --noon: #fefefe;
+  --yellow: #f0bd66;
+  --red: #e03e3e;
 
   /* Text colors */
   --color-text: var(--noon);
@@ -18,6 +20,8 @@
 
   /* Other elements */
   --divider: rgba(235, 236, 237, 0.3);
+  --player-color: var(--yellow);
+  --ai-color: var(--red);
 
   /* --highlight-color: rgba(128, 128, 128, 0.2);
   --teal: rgb(90, 200, 250);
