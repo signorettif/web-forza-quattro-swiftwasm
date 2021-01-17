@@ -10,4 +10,7 @@ export const CONSTANTS = {
 
   // Search algorithm
   MAX_DEPTH: 4,
+
+  //WASM
+  WASM_FILE_PATH: './main.wasm',
 };

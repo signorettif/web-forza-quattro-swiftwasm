@@ -13,6 +13,7 @@ import { AIStats } from '../components/sidebar/widgets/AIStats';
 // Constants
 import { CONSTANTS } from '../shared/config/constants';
 import { SettingsWidget } from '../components/sidebar/widgets/Settings';
+import { loadWasmUtil } from '../shared/utils/loadWASM';
 
 // Main functional component
 export default function Home() {
@@ -21,9 +22,25 @@ export default function Home() {
     ENGINE: 'javascript',
     MAX_DEPTH: CONSTANTS.MAX_DEPTH,
   });
+  const [modelLoaded, setModelLoaded] = useState(false);
+  const [WASMFn, setWASMFn] = useState<any>(undefined);
   const winner = GameUtils.winner(gameState);
 
-  console.log(settings.MAX_DEPTH);
+  // Loads wasm file if setting is changed in engine
+  useEffect(() => {
+    if (settings.ENGINE === 'wasm') {
+      const fetchFn = async () => {
+        const myFunc = await loadWasmUtil();
+
+        const whatToLog = myFunc(gameState.board, gameState.player);
+
+        console.log(whatToLog);
+      };
+
+      fetchFn();
+      console.log('[WASM] Loaded WASM model');
+    }
+  }, [settings.ENGINE, gameState]);
 
   // If the AI is called to play, then play
   useEffect(() => {
@@ -32,6 +49,10 @@ export default function Home() {
         GameUtils.playAIBestNextMove(gameState, settings.MAX_DEPTH)
       );
     }
+
+    // if (settings.ENGINE === 'wasm' && WASMFn) {
+    //   console.log(WASMFn(gameState.board, gameState.player));
+    // }
   }, [gameState.player]);
 
   // Winner modal
