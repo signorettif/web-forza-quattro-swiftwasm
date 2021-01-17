@@ -3,7 +3,7 @@
   --sm: 640px;
 
   /* Key colors */
-  --midnight: #131415;
+  --midnight: #191919;
   --noon: #fefefe;
 
   /* Text colors */
@@ -13,6 +13,7 @@
 
   /* Background colors */
   --background-color: var(--midnight);
+  --background-alpha: rgba(20, 20, 20, 0.8);
   --foreground-color: var(--noon);
 
   /* Other elements */

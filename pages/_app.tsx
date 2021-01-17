@@ -8,7 +8,6 @@ import "styles/resets/normalize.css";
 import "styles/variables.css";
 import "styles/globals.css";
 import "styles/typography.css";
-import "../styles/tailwind.css";
 
 function App({ Component, pageProps }: AppProps) {
   return <Component {...pageProps} />;
