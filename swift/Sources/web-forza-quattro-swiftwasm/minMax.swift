@@ -14,30 +14,36 @@ func minMax (
     depth: Int = 0
 ) -> [Int] {
     
-//    var bestMove = -1;
-//    var bestScore = isMaximizing == true ? Int(-1000000) : Int(-1000000);
-//
-//    for col in allowedColumns(board: state.board) {
-//        let tempGame = playInColumn(state: state, col: col);
-//        let tempGameScore = score(board: tempGame.board)
-//        var newBestScore: Int;
-//
-//        if (!isTerminal(board: tempGame.board) && depth < maxDepth) {
-//            newBestScore = minMax(state: tempGame, isMaximizing: !isMaximizing, maxDepth: maxDepth, depth: depth + 1).0;
-//        } else {
-//          newBestScore = tempGameScore;
-//        }
-//
-//        if (isMaximizing && newBestScore > bestScore) {
-//          bestScore = newBestScore;
-//          bestMove = col;
-//        }
-//
-//        if (!isMaximizing && newBestScore < bestScore) {
-//          bestScore = newBestScore;
-//          bestMove = col;
-//        }
-//    }
+    var bestMove = -1;
+    var bestScore = isMaximizing ? Int(-1000000) : Int(+1000000);
 
-    return [100, 4];
+    for col in allowedColumns(board: state.board) {
+        let tempGame = playInColumn(state: state, col: col);
+        let tempGameScore = score(board: tempGame.board)
+        var newBestScore: Int = 0;
+
+        if (!isTerminal(board: tempGame.board) && depth < maxDepth) {
+            newBestScore = minMax(state: tempGame, isMaximizing: !isMaximizing, maxDepth: maxDepth, depth: depth + 1)[0];
+            
+//            print(newBestScore)
+        } else {
+          newBestScore = tempGameScore;
+        }
+
+        if (isMaximizing && newBestScore > bestScore) {
+            
+          bestScore = newBestScore;
+//            print("maximizing with new score \(bestScore)")
+          bestMove = col;
+        }
+
+        if (!isMaximizing && newBestScore < bestScore) {
+            
+          bestScore = newBestScore;
+//            print("minimizing with new score \(bestScore)")
+          bestMove = col;
+        }
+    }
+
+    return [bestScore, bestMove];
 };

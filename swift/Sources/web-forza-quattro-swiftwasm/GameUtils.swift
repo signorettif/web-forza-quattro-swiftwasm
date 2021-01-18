@@ -144,27 +144,25 @@ for row in 0..<(N_ROWS - 3) {
 
 
 // Predicts the next move for AI (using minmax algorithm)
-func predictAIBestNextMove (board: [[Int]], player: Int, maxDepth: Int) -> Int {
+func predictAIBestNextMove (state: GameState, maxDepth: Int) -> Int {
     
-//    var bestPlay = -1;
-//
-//    if (state.player == AI_PLAYER) {
-//        let resultsArray = minMax(state: state, isMaximizing: true, maxDepth: maxDepth)
-//
-//        let bestScore = resultsArray[0]
-//        let bestMove = resultsArray[1]
-//
-//        print("[SWIFT_AI] Playing in \(bestMove + 1) with expected payoff of \(bestScore)")
-//
-//        bestPlay = bestMove
-//    } else {
-//        print("[SWIFT_AI_ERROR] Player is not AI but I am asked to run a prediction");
-//    }
-//
-//    print(bestPlay)
-//    return bestPlay;
+    var bestPlay = -1;
+
+    if (state.player == AI_PLAYER) {
+        let resultsArray = minMax(state: state, isMaximizing: true, maxDepth: maxDepth)
+
+        let bestScore = resultsArray[0]
+        let bestMove = resultsArray[1]
+
+        print("[SWIFT_AI] Playing in \(bestMove + 1) with expected payoff of \(bestScore)")
+
+        bestPlay = bestMove
+    } else {
+        print("[SWIFT_AI_ERROR] Player is not AI but I am asked to run a prediction");
+    }
+
+    return bestPlay;
     
-    return state.player
  };
 
 
@@ -176,9 +174,9 @@ func predictAIBestNextMove (board: [[Int]], player: Int, maxDepth: Int) -> Int {
 func allowedColumns (board: [[Int]]) -> [Int] {
     var allowedColumns: [Int] = []
     
-    for row in board {
-        for column in row {
-            if (column == 0) {
+    for row in 0..<board.count {
+        for column in 0..<board[row].count {
+            if (board[row][column] == 0) {
                 allowedColumns.append(column)
             }
         }
@@ -200,10 +198,7 @@ func playInColumn (state: GameState, col: Int) -> GameState {
     }
     
     return GameState(board: tempBoard, player: -state.player)
-    
-    
 
-//    return GameState(board: tempGameState, -state.player);
 };
 
 

@@ -222,8 +222,7 @@ class GameUtils {
     state: GameState,
     maxDepth = CONSTANTS.MAX_DEPTH
   ) => {
-    const colToPlay = GameUtils.predictAIBestNextMove(state, maxDepth);
-    return GameUtils.playInColumn(state, colToPlay);
+    return GameUtils.predictAIBestNextMove(state, maxDepth);
   };
 
   //

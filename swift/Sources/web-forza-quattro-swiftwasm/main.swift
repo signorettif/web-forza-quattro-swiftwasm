@@ -16,15 +16,16 @@ struct GameState: Codable {
 func predictAIUsingSwift (gameStateData: JSValue, maxDepth: JSValue) -> JSValue {
     let decodedGameState: GameState = try! JSValueDecoder().decode(from: gameStateData)
     
-    let decodedMaxDepth: Int = try! JSValueDecoder().decode(from: maxDepth)
+    let decodedDepth: Double = try! JSValueDecoder().decode(from: maxDepth)
     
-    let valueToReturn = predictAIBestNextMove(state: decodedGameState, maxDepth: decodedMaxDepth)
+//    let decodedMaxDepth: Int = try! JSValueDecoder().decode(from: maxDepth)
     
-    print(valueToReturn)
+    let valueToReturn = predictAIBestNextMove(state: decodedGameState, maxDepth: Int(decodedDepth))
+
 
     return JSValue.number(Double(valueToReturn))
 }
 
-let closure = JSClosure { (input: [JSValue]) -> JSValue in predictAIUsingSwift(gameStateData: input[0], maxDepth: input[1]) }
+let closure = JSClosure { (input: [JSValue] ) -> JSValue in predictAIUsingSwift(gameStateData: input[0], maxDepth: input[1]) }
 
 JSObject.global.predictAIUsingSwift = .function(closure)

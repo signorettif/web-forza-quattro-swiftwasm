@@ -32,24 +32,29 @@ export default function Home() {
   // Loads wasm file if setting is changed in engine
   useEffect(() => {
     if (settings.ENGINE === 'wasm') {
-      // const fetchFn = async () => {
-      //   const predictAIUsingSwift = await loadWasmUtil();
-      //   setWASMFn(predictAIUsingSwift);
-      //   console.log('[WASM] Loaded WASM model');
-      // };
-      // if (WASMFn === undefined) {
-      //   fetchFn();
-      // }
+      const fetchFn = async () => {
+        const predictAIUsingSwift = await loadWasmUtil();
+        setWASMFn(() => predictAIUsingSwift);
+        console.log('[WASM] Loaded WASM model');
+      };
+
+      if (WASMFn === undefined) {
+        fetchFn();
+      }
     }
   }, [settings.ENGINE]);
 
   // If the AI is called to play, then play
   useEffect(() => {
     if (gameState.player === CONSTANTS.AI_PLAYER) {
-      setGameState(() =>
-        GameUtils.playAIBestNextMove(gameState, settings.MAX_DEPTH)
-      );
-      WASMFn && console.log(WASMFn(gameState, settings.MAX_DEPTH));
+      var colToPlay = 0;
+      if (WASMFn && gameState && settings.ENGINE === 'wasm') {
+        colToPlay = WASMFn(gameState, settings.MAX_DEPTH);
+      } else {
+        colToPlay = GameUtils.playAIBestNextMove(gameState, settings.MAX_DEPTH);
+      }
+
+      setGameState(() => GameUtils.playInColumn(gameState, colToPlay));
     }
 
     // if (settings.ENGINE === 'wasm' && WASMFn) {
