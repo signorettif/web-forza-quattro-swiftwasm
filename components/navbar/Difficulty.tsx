@@ -10,29 +10,19 @@ interface SettingsWidgetProps {
   setSettings: Dispatch<SetStateAction<SettingsInterface>>;
 }
 
-// Styles
-import styles from "styles/components/navbar.module.scss";
-
 export const Difficulty = ({ settings, setSettings }: SettingsWidgetProps) => {
+  // Destructure currentDepth
+  const { MAX_DEPTH: currentDepth } = settings;
+
   // Event handler
-  const handleChangeDepth = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setSettings({ ...settings, MAX_DEPTH: Number(e.target.value) });
+  const handleChangeDepth = () => {
+    const foundIndex =
+      SETTINGS_ALLOWED.DEPTH.findIndex((depth) => depth === currentDepth) + 1;
+    const newIndex =
+      foundIndex < SETTINGS_ALLOWED.DEPTH.length ? foundIndex : 0;
+    const newDepth = SETTINGS_ALLOWED.DEPTH[newIndex];
+    setSettings({ ...settings, MAX_DEPTH: newDepth });
   };
 
-  return (
-    <span className={styles.navbarComponent}>
-      <select
-        name="depth"
-        onChange={handleChangeDepth}
-        value={settings.MAX_DEPTH}
-        className="w-full text-black mt-6"
-      >
-        {SETTINGS_ALLOWED.DEPTH.map((setting) => (
-          <option value={setting} key={setting}>
-            {setting}
-          </option>
-        ))}
-      </select>
-    </span>
-  );
+  return <span onClick={handleChangeDepth}>Difficulty: {currentDepth}</span>;
 };

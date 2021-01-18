@@ -3,21 +3,22 @@ import Head from "next/head";
 import { useEffect, useState } from "react";
 
 // Game stuff
-import GameUtils from "../shared/gameHelpers/GameUtils";
+import GameUtils from "shared/gameHelpers/GameUtils";
 
 // Components
 import { Difficulty } from "components/navbar/Difficulty";
 import { ToggleEngine } from "components/navbar/ToggleEngine";
-import { AIStats } from "components/navbar/AIStats";
-import { InputSection } from "../components/board/InputSection";
-import { OutputSection } from "../components/board/OutputSection";
+import { InputSection } from "components/board/InputSection";
+import { OutputSection } from "components/board/OutputSection";
 
 // Constants
-import { CONSTANTS } from "../shared/config/constants";
-import { loadWasmUtil } from "../shared/utils/loadWASM";
+import { CONSTANTS } from "shared/config/constants";
+import { loadWasmUtil } from "shared/utils/loadWASM";
 
 // Styles
 import styles from "styles/pages/quattro.module.scss";
+import navbarStyles from "styles/components/navbar.module.scss";
+import cn from "classnames";
 
 // Main functional component
 export default function Home() {
@@ -72,10 +73,15 @@ export default function Home() {
       <div className={styles.container}>
         <nav>
           <h1>Connect 4</h1>
-          <div>
-            <AIStats gameState={gameState} />
-            <Difficulty settings={settings} setSettings={setSettings} />
+          <div className={styles.right}>
             <ToggleEngine settings={settings} setSettings={setSettings} />
+            <span
+              className={cn(navbarStyles.navbarComponent, navbarStyles.aiStats)}
+            >
+              <Difficulty settings={settings} setSettings={setSettings} />
+              <span className={navbarStyles.divider}>|</span>
+              🤖 {GameUtils.score(gameState)}
+            </span>
           </div>
         </nav>
 

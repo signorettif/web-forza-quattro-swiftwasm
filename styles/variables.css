@@ -1,5 +1,6 @@
 :root {
   /* Breakpoints */
+  --xs: 576px;
   --sm: 640px;
 
   /* Key colors */
@@ -15,7 +16,7 @@
 
   /* Background colors */
   --background-color: var(--midnight);
-  --background-alpha: rgba(20, 20, 20, 0.8);
+  --background-alpha: rgba(20, 20, 20, 0.7);
   --foreground-color: var(--noon);
 
   /* Other elements */

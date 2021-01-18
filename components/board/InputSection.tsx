@@ -19,7 +19,7 @@ export const InputSection = ({
   gameState,
   setGameState,
 }: InputSectionProps) => {
-  const columns = [...Array(CONSTANTS.N_COLS + 1).keys()];
+  const columns = [...Array(CONSTANTS.N_COLS).keys()];
   const allowedColumns = GameUtils.allowedColumns(gameState);
 
   const playColumn = (col: number) => {
@@ -29,8 +29,8 @@ export const InputSection = ({
   return (
     <div className={styles.inputs}>
       {columns.map((column) => (
-        <div key={column} onClick={() => playColumn(column - 1)}>
-          {column !== 0 ? column : ""}
+        <div key={column} onClick={() => playColumn(column)}>
+          {column}
         </div>
       ))}
     </div>

@@ -1,3 +1,31 @@
 .navbarComponent {
-  padding: 10px 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 32px;
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
+  font-weight: 600;
+  border-radius: 100px;
+
+  &:hover {
+    background-color: hsla(0, 0%, 100%, 0.1);
+    box-shadow: 0 20px 40px -10px rgb(0 0 0 / 100%);
+  }
+
+  .divider {
+    color: var(--divider);
+    padding: 0 10px;
+    display: inline-block;
+    visibility: visible;
+  }
+}
+
+.aiStats {
+  padding: 6px 16px;
+  background-color: hsla(0, 0%, 100%, 0.05);
+}
+
+.engineToggle {
+  width: 32px;
 }

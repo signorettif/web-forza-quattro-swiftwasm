@@ -21,11 +21,21 @@
     background-color: var(--background-alpha);
     margin-bottom: 3rem;
     z-index: 2;
+    box-shadow: 0 0 20px rgb(0 0 0 / 50%);
 
     padding: 0 30px;
     display: flex;
     align-items: center;
     justify-content: space-between;
+
+    .right {
+      display: flex;
+      align-items: center;
+
+      & > * {
+        margin-left: 8px;
+      }
+    }
   }
 
   .belowNavbar {
@@ -41,7 +51,12 @@
 
     margin: auto;
     width: 100%;
-    max-width: var(--sm);
+    max-width: var(--xs);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
   }
 
   footer {
@@ -50,5 +65,9 @@
     padding: 0 30px;
     display: flex;
     align-items: center;
+
+    p {
+      font-size: 14px;
+    }
   }
 }
