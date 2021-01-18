@@ -1,0 +1,30 @@
+{
+  "name": "web-forza-quattro-swiftwasm",
+  "version": "0.1.0",
+  "private": false,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "generate-css-types": "tailwindcss-classnames -i tailwind.config.js",
+    "build-wasm": "./scripts/build_wasm.sh"
+  },
+  "dependencies": {
+    "@wasmer/wasi": "^0.12.0",
+    "@wasmer/wasmfs": "^0.12.0",
+    "autoprefixer": "^10.2.1",
+    "classnames": "^2.2.6",
+    "javascript-kit-swift": "^0.9.0",
+    "next": "10.0.5",
+    "postcss": "^8.2.4",
+    "react": "17.0.1",
+    "react-dom": "17.0.1",
+    "sass": "^1.32.4"
+  },
+  "devDependencies": {
+    "@types/classnames": "^2.2.11",
+    "@types/node": "^14.14.20",
+    "@types/react": "^17.0.0",
+    "typescript": "^4.1.3"
+  }
+}
