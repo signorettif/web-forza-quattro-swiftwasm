@@ -87,8 +87,7 @@ export default function Home() {
 
         <div className={styles.belowNavbar}>
           <main>
-            <InputSection gameState={gameState} setGameState={setGameState} />
-            <OutputSection gameState={gameState} />
+            <OutputSection gameState={gameState} setGameState={setGameState} />
           </main>
 
           <footer>

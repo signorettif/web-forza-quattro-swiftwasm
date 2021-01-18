@@ -32,18 +32,34 @@
     padding: 10px;
     width: 100%;
     background: linear-gradient(180deg, #1d1d1d 0%, #0d0d0d 85%, #0d0d0d 100%);
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
   }
 }
 
-.output {
-  display: grid;
-  flex: 1;
-  grid-template-columns: repeat(7, 1fr);
+.column {
+  $border: 1px;
+
+  &:hover {
+    .cell .cellContent .coin .coinContent {
+      &.showHover {
+        margin: -$border;
+        background: linear-gradient(
+          135deg,
+          rgba(253, 245, 237, 0.6) 0%,
+          rgba(235, 185, 58, 0.6) 100%
+        );
+        box-shadow: inset 0px 3.5px 2.33333px rgba(138, 73, 13, 0.2),
+          inset 0px 9.33333px 14px rgba(192, 80, 0, 0.6);
+      }
+    }
+  }
 
   .cell {
     width: 100%;
     padding-top: 100%; // trick for 1:1 aspect ratio
     position: relative;
+    cursor: pointer;
 
     .cellContent {
       position: absolute;
@@ -57,7 +73,6 @@
         height: 100%;
         width: 100%;
         border-radius: 100px;
-        $border: 1px;
         border: solid $border transparent;
         background-clip: padding-box;
         position: relative;
@@ -76,26 +91,27 @@
           margin: -$border; /* !importanté */
           border-radius: inherit; /* !importanté */
           background: linear-gradient(
-            160deg,
-            rgba(255, 255, 255, 0.08) 0%,
+            210deg,
+            rgba(255, 255, 255, 0.06) 0%,
             rgba(255, 255, 255, 0.03) 100%
           );
         }
 
         .coinContent {
-          margin: -$border;
           height: 100%;
           width: 100%;
           border-radius: 100px;
           background: black;
 
           &.playerColor {
+            margin: -$border;
             background: linear-gradient(135deg, #ffe6ce 0%, #ecaa00 100%);
             box-shadow: inset 0px 3.5px 2.33333px rgba(138, 73, 13, 0.4),
               inset 0px 9.33333px 14px rgba(192, 80, 0, 0.7);
           }
 
           &.aiColor {
+            margin: -$border;
             background: linear-gradient(135deg, #ff7f7f 0%, #f12c5b 100%);
             box-shadow: inset 0px 3.5px 2.33333px rgba(129, 2, 71, 0.4),
               inset 0px 9.33333px 14px rgba(151, 0, 27, 0.7);
