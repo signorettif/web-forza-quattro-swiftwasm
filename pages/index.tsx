@@ -32,15 +32,14 @@ export default function Home() {
   // Loads wasm file if setting is changed in engine
   useEffect(() => {
     if (settings.ENGINE === 'wasm') {
-      const fetchFn = async () => {
-        const predictAIUsingSwift = await loadWasmUtil();
-        setWASMFn(predictAIUsingSwift);
-        console.log('[WASM] Loaded WASM model');
-      };
-
-      if (WASMFn === undefined) {
-        fetchFn();
-      }
+      // const fetchFn = async () => {
+      //   const predictAIUsingSwift = await loadWasmUtil();
+      //   setWASMFn(predictAIUsingSwift);
+      //   console.log('[WASM] Loaded WASM model');
+      // };
+      // if (WASMFn === undefined) {
+      //   fetchFn();
+      // }
     }
   }, [settings.ENGINE]);
 
