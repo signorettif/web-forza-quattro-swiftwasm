@@ -4,11 +4,11 @@ import { useEffect, useState } from "react";
 
 // Game stuff
 import GameUtils from "shared/gameHelpers/GameUtils";
+import GameState from "shared/gameHelpers/GameState";
 
 // Components
 import { Difficulty } from "components/navbar/Difficulty";
 import { ToggleEngine } from "components/navbar/ToggleEngine";
-import { InputSection } from "components/board/InputSection";
 import { OutputSection } from "components/board/OutputSection";
 
 // Constants
@@ -28,22 +28,24 @@ export default function Home() {
     MAX_DEPTH: CONSTANTS.MAX_DEPTH,
   });
   const [modelLoaded, setModelLoaded] = useState(false);
-  const [WASMFn, setWASMFn] = useState<any>(undefined);
+  const [WASMFn, setWASMFn] = useState<
+    (gameState: GameState, maxDepth: number) => number
+  >(undefined);
   const winner = GameUtils.winner(gameState);
 
   // Loads wasm file if setting is changed in engine
   useEffect(() => {
     if (settings.ENGINE === "wasm") {
-      const fetchFn = async () => {
-        const predictAIUsingSwift = await loadWasmUtil();
-
-        console.log(predictAIUsingSwift(gameState));
-      };
-
-      fetchFn();
-      console.log("[WASM] Loaded WASM model");
+      // const fetchFn = async () => {
+      //   const predictAIUsingSwift = await loadWasmUtil();
+      //   setWASMFn(predictAIUsingSwift);
+      //   console.log('[WASM] Loaded WASM model');
+      // };
+      // if (WASMFn === undefined) {
+      //   fetchFn();
+      // }
     }
-  }, [settings.ENGINE, gameState]);
+  }, [settings.ENGINE]);
 
   // If the AI is called to play, then play
   useEffect(() => {
@@ -51,6 +53,7 @@ export default function Home() {
       setGameState(() =>
         GameUtils.playAIBestNextMove(gameState, settings.MAX_DEPTH)
       );
+      WASMFn && console.log(WASMFn(gameState, settings.MAX_DEPTH));
     }
 
     // if (settings.ENGINE === 'wasm' && WASMFn) {

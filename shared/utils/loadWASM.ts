@@ -105,7 +105,7 @@ export const loadWasmUtil = async () => {
 
   // Required because TS has no idea about what's actually happening in the global scope from Swift
   let returnFunc = ((window as unknown) as {
-    predictAIUsingSwift: (gameState: GameState) => number;
+    predictAIUsingSwift: (gameState: GameState, maxDepth: number) => number;
   }).predictAIUsingSwift;
 
   return returnFunc;
