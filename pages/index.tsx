@@ -35,11 +35,9 @@ export default function Home() {
   useEffect(() => {
     if (settings.ENGINE === "wasm") {
       const fetchFn = async () => {
-        const myFunc = await loadWasmUtil();
+        const predictAIUsingSwift = await loadWasmUtil();
 
-        const whatToLog = myFunc(gameState.board, gameState.player);
-
-        console.log(whatToLog);
+        console.log(predictAIUsingSwift(gameState));
       };
 
       fetchFn();

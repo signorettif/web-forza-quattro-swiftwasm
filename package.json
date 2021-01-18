@@ -6,13 +6,15 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "generate-css-types": "tailwindcss-classnames -i tailwind.config.js"
+    "generate-css-types": "tailwindcss-classnames -i tailwind.config.js",
+    "build-wasm": "./scripts/build_wasm.sh"
   },
   "dependencies": {
     "@wasmer/wasi": "^0.12.0",
     "@wasmer/wasmfs": "^0.12.0",
     "autoprefixer": "^10.2.1",
     "classnames": "^2.2.6",
+    "javascript-kit-swift": "^0.9.0",
     "next": "10.0.5",
     "postcss": "^8.2.4",
     "react": "17.0.1",
