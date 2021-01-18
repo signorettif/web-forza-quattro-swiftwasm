@@ -14,6 +14,7 @@ import { AIStats } from '../components/sidebar/widgets/AIStats';
 import { CONSTANTS } from '../shared/config/constants';
 import { SettingsWidget } from '../components/sidebar/widgets/Settings';
 import { loadWasmUtil } from '../shared/utils/loadWASM';
+import GameState from '../shared/gameHelpers/GameState';
 
 // Main functional component
 export default function Home() {
@@ -23,7 +24,9 @@ export default function Home() {
     MAX_DEPTH: CONSTANTS.MAX_DEPTH,
   });
   const [modelLoaded, setModelLoaded] = useState(false);
-  const [WASMFn, setWASMFn] = useState<any>(undefined);
+  const [WASMFn, setWASMFn] = useState<
+    (gameState: GameState, maxDepth: number) => number
+  >(undefined);
   const winner = GameUtils.winner(gameState);
 
   // Loads wasm file if setting is changed in engine
@@ -31,14 +34,15 @@ export default function Home() {
     if (settings.ENGINE === 'wasm') {
       const fetchFn = async () => {
         const predictAIUsingSwift = await loadWasmUtil();
-
-        console.log(predictAIUsingSwift(gameState));
+        setWASMFn(predictAIUsingSwift);
+        console.log('[WASM] Loaded WASM model');
       };
 
-      fetchFn();
-      console.log('[WASM] Loaded WASM model');
+      if (WASMFn === undefined) {
+        fetchFn();
+      }
     }
-  }, [settings.ENGINE, gameState]);
+  }, [settings.ENGINE]);
 
   // If the AI is called to play, then play
   useEffect(() => {
@@ -46,6 +50,7 @@ export default function Home() {
       setGameState(() =>
         GameUtils.playAIBestNextMove(gameState, settings.MAX_DEPTH)
       );
+      WASMFn && console.log(WASMFn(gameState, settings.MAX_DEPTH));
     }
 
     // if (settings.ENGINE === 'wasm' && WASMFn) {
