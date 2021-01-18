@@ -1,6 +1,9 @@
 /** Class representing a game state. */
 
-import GameUtils from './GameUtils';
+import GameUtils from "./GameUtils";
+
+// Helper to transpose
+const transpose = (m) => m[0].map((x, i) => m.map((x) => x[i]));
 
 class GameState {
   board: number[][];
@@ -9,6 +12,10 @@ class GameState {
   constructor(board, player) {
     this.board = board;
     this.player = player;
+  }
+
+  getColumns() {
+    return transpose(this.board);
   }
 
   isTerminal() {

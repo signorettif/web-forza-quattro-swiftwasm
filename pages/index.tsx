@@ -1,26 +1,30 @@
 // Next.js and React.js stuff
-import Head from 'next/head';
-import { useEffect, useState } from 'react';
+import Head from "next/head";
+import { useEffect, useState } from "react";
 
 // Game stuff
-import GameUtils from '../shared/gameHelpers/GameUtils';
+import GameUtils from "shared/gameHelpers/GameUtils";
+import GameState from "shared/gameHelpers/GameState";
 
 // Components
-import { InputSection } from '../components/home/InputSection';
-import { OutputSection } from '../components/home/OutputSection';
-import { AIStats } from '../components/sidebar/widgets/AIStats';
+import { Difficulty } from "components/navbar/Difficulty";
+import { ToggleEngine } from "components/navbar/ToggleEngine";
+import { OutputSection } from "components/board/OutputSection";
 
 // Constants
-import { CONSTANTS } from '../shared/config/constants';
-import { SettingsWidget } from '../components/sidebar/widgets/Settings';
-import { loadWasmUtil } from '../shared/utils/loadWASM';
-import GameState from '../shared/gameHelpers/GameState';
+import { CONSTANTS } from "shared/config/constants";
+import { loadWasmUtil } from "shared/utils/loadWASM";
+
+// Styles
+import styles from "styles/pages/quattro.module.scss";
+import navbarStyles from "styles/components/navbar.module.scss";
+import cn from "classnames";
 
 // Main functional component
 export default function Home() {
   const [gameState, setGameState] = useState(GameUtils.startGame());
   const [settings, setSettings] = useState<SettingsInterface>({
-    ENGINE: 'javascript',
+    ENGINE: "javascript",
     MAX_DEPTH: CONSTANTS.MAX_DEPTH,
   });
   const [modelLoaded, setModelLoaded] = useState(false);
@@ -68,35 +72,33 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Web connect 4! WASM benchmarking</title>
+        <title>Connect 4 | WASM benchmarking</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className="flex h-full min-h-screen bg-bg-color text-white">
-        <div className="flex flex-grow flex-col justify-between p-12">
-          <div>
-            <h1 className="font-medium text-2xl">Connect 4</h1>
-
-            {/* Connect 4 wrapper */}
-            <div className="mt-12">
-              <div className="grid gap-8 grid-cols-8 max-w-md m-auto">
-                <InputSection
-                  gameState={gameState}
-                  setGameState={setGameState}
-                />
-                <OutputSection gameState={gameState} />
-              </div>
-            </div>
+      <div className={styles.container}>
+        <nav>
+          <h1>Connect 4</h1>
+          <div className={styles.right}>
+            <ToggleEngine settings={settings} setSettings={setSettings} />
+            <span
+              className={cn(navbarStyles.navbarComponent, navbarStyles.aiStats)}
+            >
+              <Difficulty settings={settings} setSettings={setSettings} />
+              <span className={navbarStyles.divider}>|</span>
+              🤖 {GameUtils.score(gameState)}
+            </span>
           </div>
+        </nav>
 
-          <footer className="flex-grow-0 text-secondary">
-            Made w/ ❤️ in Milan. See the source code on Github
+        <div className={styles.belowNavbar}>
+          <main>
+            <OutputSection gameState={gameState} setGameState={setGameState} />
+          </main>
+
+          <footer>
+            <p>Made w/ ❤️ in Milan. Source code available on Github.</p>
           </footer>
-        </div>
-
-        <div className="flex flex-col justify-start items-baseline bg-bg-color-light w-1/2 max-w-md p-12">
-          <AIStats gameState={gameState} />
-          <SettingsWidget settings={settings} setSettings={setSettings} />
         </div>
       </div>
     </>

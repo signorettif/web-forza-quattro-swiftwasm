@@ -1,7 +1,13 @@
-import { AppProps } from 'next/app';
+import { AppProps } from "next/app";
 
-// Styles
-import '../styles/tailwind.css';
+// Css resets
+import "styles/resets/reset.local.css";
+import "styles/resets/normalize.css";
+
+// Custom styles
+import "styles/variables.css";
+import "styles/globals.css";
+import "styles/typography.css";
 
 function App({ Component, pageProps }: AppProps) {
   return <Component {...pageProps} />;
