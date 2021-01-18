@@ -21,9 +21,6 @@ export const OutputSection = ({
   gameState,
   setGameState,
 }: OutputSectionProps) => {
-  const columns = [...Array(CONSTANTS.N_COLS).keys()];
-  const allowedColumns = GameUtils.allowedColumns(gameState);
-
   const playColumn = (col: number) => {
     setGameState(() => GameUtils.playInColumn(gameState, col));
   };
@@ -32,7 +29,6 @@ export const OutputSection = ({
     <div className={styles.board}>
       <div className={styles.boardContent}>
         {gameState.getColumns().map((column, i) => {
-          console.log(column);
           return (
             <div
               onClick={() => playColumn(i)}
