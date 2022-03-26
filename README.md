@@ -1,3 +1,3 @@
-## WASM (written in swiftwasm)
+## Forza quattro implementation with SwiftWASM and Default JS
 
-The wasm component of the playground has been compiled using swiftwasm. To get started, visit the official page of the swiftwasm project.
+Playground to compare performance of MinMax algorithm between SwiftWASM and JS
